@@ -1,0 +1,6 @@
+{% extends 'base.html' %}{% block title %}Crear cuenta | Patitas & Co.{% endblock %}{% block content %}
+<section class="login-page"><div class="login-visual"><div><span class="eyebrow">Únete a la manada</span><h1>Crea tu cuenta, <em>te enviaremos un enlace al correo.</em></h1><p>Para terminar el registro deberás abrir el enlace y escribir el código de 6 dígitos que verás en la página.</p></div></div>
+<form class="login-form" method="post" novalidate>{% csrf_token %}<span class="eyebrow dark">Registro</span><h2>Crear cuenta</h2>
+{% if form.non_field_errors %}<div class="form-error">{{ form.non_field_errors|join:" " }}</div>{% endif %}
+{% for field in form %}<label for="{{ field.id_for_label }}">{{ field.label }}</label>{{ field }}{% if field.errors %}<div class="form-error">{{ field.errors|join:" " }}</div>{% endif %}{% endfor %}
+<button class="button primary" type="submit">Crear cuenta →</button><small>¿Ya tienes cuenta? <a href="{% url 'login' %}">Ingresa aquí</a></small></form></section>{% endblock %}
