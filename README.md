@@ -45,6 +45,7 @@ Cada integrante debe crear su propia rama y commits reales. Ejemplo: `git switch
 4. Ver la fila nueva en phpMyAdmin.
 5. Probar una descripción corta o precio negativo y mostrar que no se guarda.
 6. Editar y eliminar el producto, confirmando cada cambio en MySQL.
+<<<<<<< HEAD
 
 
 ## Registro con token y código de 6 dígitos
@@ -54,3 +55,5 @@ Cada integrante debe crear su propia rama y commits reales. Ejemplo: `git switch
 4. Escribe el código y la cuenta queda activa. Luego ingresa con tu usuario.
 
 Sin configurar correo, el email aparece en la consola donde corre `runserver` (copia el enlace desde ahí).
+=======
+>>>>>>> origin/master
