@@ -1,33 +1,18 @@
 from django import forms
+from django.core.exceptions import ValidationError
 from .models import Producto
 
 class ProductoForm(forms.ModelForm):
     class Meta:
-        model = Producto
-        fields = ['nombre', 'descripcion', 'precio', 'stock']
-        widgets = {
-            'nombre': forms.TextInput(attrs={'class': 'form-control'}),
-            'descripcion': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
-            'precio': forms.NumberInput(attrs={'class': 'form-control', 'min': '0.01', 'step': '0.01'}),
-            'stock': forms.NumberInput(attrs={'class': 'form-control', 'min': '0', 'step': '1'}),
-        }
-
+        model=Producto
+        fields=["nombre","descripcion","categoria","precio","stock","imagen_url","destacado","activo"]
+        labels={"imagen_url":"Enlace de la imagen"}
+        widgets={"descripcion":forms.Textarea(attrs={"rows":4,"maxlength":600}),"precio":forms.NumberInput(attrs={"min":1,"step":1}),"stock":forms.NumberInput(attrs={"min":0}),"imagen_url":forms.URLInput(attrs={"placeholder":"https://ejemplo.cl/imagen.jpg"})}
     def clean_nombre(self):
-        nombre = self.cleaned_data.get('nombre')
-        if nombre:
-            nombre = nombre.strip()
-            if not nombre:
-                raise forms.ValidationError('El nombre es obligatorio.')
+        nombre=" ".join(self.cleaned_data["nombre"].split())
+        if len(nombre)<3: raise ValidationError("El nombre debe tener al menos 3 caracteres.")
         return nombre
-
-    def clean_precio(self):
-        precio = self.cleaned_data.get('precio')
-        if precio is not None and precio <= 0:
-            raise forms.ValidationError('El precio debe ser mayor a cero.')
-        return precio
-
-    def clean_stock(self):
-        stock = self.cleaned_data.get('stock')
-        if stock is not None and stock < 0:
-            raise forms.ValidationError('El stock no puede ser negativo.')
-        return stock
+    def clean_descripcion(self):
+        texto=self.cleaned_data["descripcion"].strip()
+        if len(texto)<15: raise ValidationError("Describe el producto con al menos 15 caracteres.")
+        return texto
