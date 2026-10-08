@@ -1,0 +1,14 @@
+{% extends 'base.html' %}{% block title %}Verifica tu cuenta | Patitas & Co.{% endblock %}{% block content %}
+<section class="login-page"><form class="login-form" method="post" autocomplete="off" novalidate>{% csrf_token %}
+<span class="eyebrow dark">Último paso</span><h2>Escribe el código</h2>
+<p>Lee el código de 6 dígitos de la imagen y escríbelo abajo. Vence en {{ minutos }} minutos.</p>
+<div class="codigo-caja" oncontextmenu="return false" ondragstart="return false" style="user-select:none;-webkit-user-select:none;position:relative;margin:12px 0">
+  <img src="{% url 'imagen_codigo' %}?t={{ ts }}" alt="Código de verificación (léelo y escríbelo abajo)" width="360" height="110" draggable="false" style="max-width:100%;pointer-events:none;display:block">
+  <div style="position:absolute;inset:0"></div>
+</div>
+{% if form.errors %}<div class="form-error">{{ form.codigo.errors|join:" " }}</div>{% endif %}
+<label for="id_codigo">Código de 6 dígitos</label>
+<input id="id_codigo" name="codigo" type="text" inputmode="numeric" pattern="\d{6}" maxlength="6" autocomplete="one-time-code" required autofocus onpaste="return false" style="letter-spacing:.5em;font-size:1.4rem;text-align:center">
+<button class="button primary" type="submit">Confirmar registro →</button>
+<small>El código no se puede copiar ni pegar: debes leerlo y escribirlo.</small>
+</form></section>{% endblock %}

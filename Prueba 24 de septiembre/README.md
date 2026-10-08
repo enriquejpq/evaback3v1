@@ -45,3 +45,12 @@ Cada integrante debe crear su propia rama y commits reales. Ejemplo: `git switch
 4. Ver la fila nueva en phpMyAdmin.
 5. Probar una descripción corta o precio negativo y mostrar que no se guarda.
 6. Editar y eliminar el producto, confirmando cada cambio en MySQL.
+
+
+## Registro con token y código de 6 dígitos
+1. Entra a `/cuenta/registro/` (botón **Crear cuenta**).
+2. Se crea el usuario desactivado y se envía un correo con un enlace con token único.
+3. Al abrir el enlace la página muestra un código de 6 dígitos como imagen (no se puede copiar ni pegar).
+4. Escribe el código y la cuenta queda activa. Luego ingresa con tu usuario.
+
+Sin configurar correo, el email aparece en la consola donde corre `runserver` (copia el enlace desde ahí).
